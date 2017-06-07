@@ -9,7 +9,7 @@ module Data.RDF.Vocabulary.Generator.VocabularyGenerator (
 import           ClassyPrelude
 import           Data.Char           (isLower)
 import           Data.Maybe          (maybeToList)
-import           Data.RDF            (AdjHashMap, Node, Node (UNode), unode, RDF, Rdf,
+import           Data.RDF            (AdjHashMap, Node (UNode), RDF, Rdf,
                                       TurtleParser (TurtleParser), parseFile,
                                       subjectOf, triplesOf, prefixMappings, PrefixMappings(PrefixMappings))
 import qualified Data.Text           as T
@@ -81,9 +81,9 @@ escape :: Text -> Text
 escape name = escapeKeywords $ T.map escapeOperators name
   where escapeOperators c | c `elem` operators = escapeChar
         escapeOperators c = c
-        escapeKeywords name | not (isLower $ T.head name) = escapeChar `cons` name
-        escapeKeywords name | name `elem` keywords        = escapeChar `cons` name
-        escapeKeywords name = name
+        escapeKeywords name' | not (isLower $ T.head name') = escapeChar `cons` name'
+        escapeKeywords name' | name' `elem` keywords        = escapeChar `cons` name'
+        escapeKeywords name' = name'
         operators = ['!','#','$','%','&','*','+','.','/','<','=','>','?','@','\\','^','|','-','~']
         keywords = ["as", "case", "of", "class", "data", "data family", "data instance",
             "default", "deriving", "deriving instance", "do", "forall", "foreign",
